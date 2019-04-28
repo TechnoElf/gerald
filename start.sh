@@ -4,7 +4,7 @@ then
 	echo "Syncing..."
 	onedrive --synchronize
 	echo "Done."
-	/opt/gerald/Gerald/display.py
+	python3 /opt/gerald/Gerald/display.py
 else
 	pkill -x "display.py"
 	sudo pkill -x "fbi"
