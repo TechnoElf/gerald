@@ -82,6 +82,8 @@ echo "Installed"
 echo "Installing Gerald"
 git clone https://github.com/TechnoElf/Gerald.git
 sed -ie '/^#!\/bin\/bash/a bash /opt/gerald/Gerald/start.sh &' /etc/rc.local
+chmod +x /opt/gerald/Gerald/dipslay.py
+chmod +x /opt/gerald/Gerald/start.sh
 chown -R pi /opt/gerald/
 echo "Installed"
 

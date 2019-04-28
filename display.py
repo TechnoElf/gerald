@@ -17,12 +17,22 @@ def displayVideos(files):
 	for file in files:
 		subprocess.run(["omxplayer", "--no-osd", file])
 
+def directoryContents(path):
+        files = [];
+        for p in path.iterdir():
+                if p.is_file():
+                        files.append(p);
+                else:
+                        files += directoryContents(p);
+        return files;
+
+
 def main():
 	while True:
 		images = []
 		videos = []
 		path = Path(dir)
-		for file in sorted(path.iterdir(), key=lambda f: str(f).lower()):
+		for file in sorted(directoryContents(path), key=lambda f: str(f).lower()):
 			if file.is_file() and file.suffix.lower() in str(imageExts):
 				images.append(str(file))
 			elif file.is_file() and file.suffix.lower() in str(videoExts):
