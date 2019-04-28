@@ -4,7 +4,7 @@ import sys, os, io, subprocess, time
 from pathlib import Path
 
 imageDisplayTime = 20
-dir = "/home/pi/Display/"
+dir = "/opt/gerald/remote/"
 imageExts = {".png", ".jpg"}
 videoExts = {".mp4"}
 

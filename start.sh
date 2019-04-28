@@ -1,11 +1,10 @@
 #!/bin/bash
-ifconfig
 if ! pgrep -x "display.py" > /dev/null
 then
 	echo "Syncing..."
-	onedrive
+	onedrive --synchronize
 	echo "Done."
-	~/Display/display.py
+	/opt/gerald/Gerald/display.py
 else
 	pkill -x "display.py"
 	sudo pkill -x "fbi"
