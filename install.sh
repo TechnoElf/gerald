@@ -71,10 +71,11 @@ echo "Remote folder path:"
 read -e ONEDRIVE_REMOTE_DIR
 echo -e "$ONEDRIVE_REMOTE_DIR\n" >> /home/pi/.config/onedrive/sync_list
 chown -R pi /home/pi/.config/
-onedrive
+onedrive --confdir /home/pi/.config/onedrive
 systemctl --user enable onedrive
 systemctl --user start onedrive
-onedrive --synchronize --download-only
+onedrive --confdir /home/pi/.config/onedrive --synchronize --download-only
+chown -R pi /home/pi/.config/
 cd ..
 echo "Installed"
 

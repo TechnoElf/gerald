@@ -2,7 +2,7 @@
 if ! pgrep -x "display.py" > /dev/null
 then
 	echo "Syncing..."
-	onedrive --synchronize
+	onedrive --synchronize --confdir /home/pi/.config/onedrive
 	echo "Done."
 	python3 /opt/gerald/Gerald/display.py
 else
