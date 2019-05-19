@@ -5,6 +5,12 @@ if [[ $EUID -ne 0 ]]; then
    exit 1
 fi
 
+wget -q --tries=10 --timeout=20 --spider http://google.com
+if [[ $? -ne 0 ]]; then
+  echo "The device must be connected to the internet"
+  exit 1
+fi
+
 echo "====================="
 echo "Gerald Install Script"
 echo "====================="
@@ -12,30 +18,6 @@ echo ""
 echo "This script will take some time to install and the system may restart multiple times"
 echo ""
 sleep 2s
-
-# Check if we are connected to the internet
-echo "Checking for an internet connection..."
-wget -q --tries=10 --timeout=20 --spider http://google.com
-if [[ $? -ne 0 ]]; then
-  echo "Not connected"
-  if grep -q "wpa-conf /etc/wpa_supplicant/wpa_supplicant.conf" /etc/network/interfaces; then
-    echo "WiFi connection was set up already but something went wrong"
-    exit 1
-  else
-    echo "Setting up a WiFi connection..."
-    echo "SSID:"
-    read -e NETWORK_SSID
-    echo "Password:"
-    read -e NETWORK_PASS
-    echo -e "\nauto lo\niface lo inet loopback\niface eth0 inet dhcp\nallow-hotplug wlan0\nauto wlan0\niface wlan0 inet dhcp\nwpa-conf /etc/wpa_supplicant/wpa_supplicant.conf\n" >> /etc/network/interfaces
-    echo -e "\nnetwork={\n    ssid=\"$NETWORK_SSID\"\n    psk=\"$NETWORK_PASS\"\n}\n" >> /etc/wpa_supplicant/wpa_supplicant.conf
-    systemctl enable ssh
-    systemctl start ssh
-    echo "Rebooting..."
-    reboot
-  fi
-fi
-echo "Connected"
 
 # Install dependencies
 echo "Installing dependencies..."
@@ -80,13 +62,11 @@ echo "Installed"
 # Finally we get to the actual setup
 echo "Installing Gerald"
 git clone https://github.com/TechnoElf/gerald.git
-sed -ie '/^#!\/bin\/bash/a bash /opt/gerald/gerald/start.sh &' /etc/rc.local
-chmod +x /opt/gerald/gerald/dipslay.py
+sudo sed -ie '/^exit.*/i bash \/opt\/gerald\/gerald\/start.sh &' /etc/rc.local
+chmod +x /opt/gerald/gerald/display.py
 chmod +x /opt/gerald/gerald/start.sh
 chown -R pi /opt/gerald/
 echo "Installed"
 
 echo "Setup completed"
 echo "Please reboot"
-
-rm $0
