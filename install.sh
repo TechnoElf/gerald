@@ -81,10 +81,10 @@ echo "Installed"
 
 # Finally we get to the actual setup
 echo "Installing Gerald"
-git clone https://github.com/TechnoElf/Gerald.git
-sed -ie '/^#!\/bin\/bash/a bash /opt/gerald/Gerald/start.sh &' /etc/rc.local
-chmod +x /opt/gerald/Gerald/dipslay.py
-chmod +x /opt/gerald/Gerald/start.sh
+git clone https://github.com/TechnoElf/gerald.git
+sed -ie '/^#!\/bin\/bash/a bash /opt/gerald/gerald/start.sh &' /etc/rc.local
+chmod +x /opt/gerald/gerald/dipslay.py
+chmod +x /opt/gerald/gerald/start.sh
 chown -R pi /opt/gerald/
 echo "Installed"
 
