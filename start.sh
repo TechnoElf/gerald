@@ -7,7 +7,7 @@ then
 	bash /opt/gerald/update.sh
 	rm /opt/gerald/update.sh
 	echo "Syncing..."
-	onedrive --synchronize --confdir /home/pi/.config/onedrive
+	onedrive --synchronize --download-only --confdir /home/pi/.config/onedrive
 	echo "Done."
 	python3 /opt/gerald/gerald/display.py
 else
