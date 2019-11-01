@@ -6,10 +6,7 @@ then
 	chmod +x /opt/gerald/update.sh
 	bash /opt/gerald/update.sh
 	rm /opt/gerald/update.sh
-	echo "Syncing..."
-	onedrive --synchronize --download-only --confdir /home/pi/.config/onedrive
-	echo "Done."
-	python3 /opt/gerald/gerald/display.py
+	python3 /opt/gerald/gerald/gerald.py
 else
 	pkill -x "display.py"
 	sudo pkill -x "fbi"
