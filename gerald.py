@@ -1,16 +1,13 @@
 #!/usr/bin/python3
 import sys
 import subprocess
-from pathlib import Path
 
+import parser
 import remote
 import management
 import display
 
 IMAGE_DISPLAY_TIME = 20
-REMOTE_DIRECTORY = "/opt/gerald/remote/"
-IMAGE_EXTENSIONS = {".png", ".jpg", ".bmp", ".gif"}
-VIDEO_EXTENSION = {".mp4", ".mov"}
 
 
 def main():
@@ -18,17 +15,10 @@ def main():
     remote.sync_onedrive()
 
     while True:
-        images = []
-        videos = []
-        path = Path(REMOTE_DIRECTORY)
-        for file in sorted(remote.directory_contents(path), key=lambda f: str(f).lower()):
-            if file.is_file() and file.suffix.lower() in str(IMAGE_EXTENSIONS):
-                images.append(str(file))
-            elif file.is_file() and file.suffix.lower() in str(VIDEO_EXTENSION):
-                videos.append(str(file))
+        files = parser.parse_file_list(remote.directory_contents())
 
-        display.images(images, IMAGE_DISPLAY_TIME)
-        display.videos(videos)
+        display.images(filter((lambda file_and_type: (file_and_type[1] == parser.FileType.IMAGE)), files), IMAGE_DISPLAY_TIME)
+        display.videos(filter((lambda file_and_type: (file_and_type[1] == parser.FileType.VIDEO)), files))
 
 
 if __name__ == '__main__':

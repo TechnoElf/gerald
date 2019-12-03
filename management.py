@@ -1,8 +1,8 @@
 #!/usr/bin/python3
-# import subprocess
+import subprocess
 
 
 def update():
     print("Updating gerald...")
-    # subprocess.run(["git", "pull"])
+    subprocess.run(["sudo", "git", "pull"])
     print("Done.")
