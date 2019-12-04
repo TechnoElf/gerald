@@ -17,8 +17,8 @@ def main():
     while True:
         files = parser.parse_file_list(remote.directory_contents())
 
-        display.images(filter((lambda file_and_type: (file_and_type[1] == parser.FileType.IMAGE)), files), IMAGE_DISPLAY_TIME)
-        display.videos(filter((lambda file_and_type: (file_and_type[1] == parser.FileType.VIDEO)), files))
+        display.images(list(map((lambda file_and_type: file_and_type[0]), filter((lambda file_and_type: (file_and_type[1] == parser.FileType.IMAGE)), files))), IMAGE_DISPLAY_TIME)
+        display.videos(list(map((lambda file_and_type: file_and_type[0]), filter((lambda file_and_type: (file_and_type[1] == parser.FileType.VIDEO)), files))))
 
 
 if __name__ == '__main__':
