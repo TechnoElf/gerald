@@ -1,14 +1,13 @@
-#!/usr/bin/python3
-from enum import Enum, auto
+from enum import Enum
 
 IMAGE_EXTENSIONS = {".png", ".jpg", ".bmp", ".gif"}
 VIDEO_EXTENSIONS = {".mp4", ".mov"}
 
 
 class FileType(Enum):
-    NONE = auto()
-    IMAGE = auto()
-    VIDEO = auto()
+    NONE = 1
+    IMAGE = 2
+    VIDEO = 3
 
 
 def parse_file_list(files):

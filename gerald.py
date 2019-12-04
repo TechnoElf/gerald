@@ -4,21 +4,19 @@ import subprocess
 
 import parser
 import remote
-import management
 import display
 
 IMAGE_DISPLAY_TIME = 20
 
 
 def main():
-    management.update()
-    remote.sync_onedrive()
+    remote.synchronise()
 
     while True:
-        files = parser.parse_file_list(remote.directory_contents())
+        files = parser.parse_file_list(remote.get_content())
 
-        display.images(list(map((lambda file_and_type: file_and_type[0]), filter((lambda file_and_type: (file_and_type[1] == parser.FileType.IMAGE)), files))), IMAGE_DISPLAY_TIME)
-        display.videos(list(map((lambda file_and_type: file_and_type[0]), filter((lambda file_and_type: (file_and_type[1] == parser.FileType.VIDEO)), files))))
+        display.images(list(map((lambda file_and_type: str(file_and_type[0])), filter((lambda file_and_type: (file_and_type[1] == parser.FileType.IMAGE)), files))), IMAGE_DISPLAY_TIME)
+        display.videos(list(map((lambda file_and_type: str(file_and_type[0])), filter((lambda file_and_type: (file_and_type[1] == parser.FileType.VIDEO)), files))))
 
 
 if __name__ == '__main__':

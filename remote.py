@@ -1,8 +1,11 @@
-#!/usr/bin/python3
 import subprocess
 from pathlib import Path
 
 REMOTE_DIRECTORY = "/opt/gerald/remote/"
+
+
+def synchronise():
+    sync_onedrive()
 
 
 def sync_onedrive():
@@ -11,7 +14,7 @@ def sync_onedrive():
     print("Done.")
 
 
-def directory_contents():
+def get_content():
     return crawl_directory(Path(REMOTE_DIRECTORY))
 
 
