@@ -2,7 +2,7 @@
 import subprocess
 import sys
 
-GERALD_PATH = "/opt/gerald/gerald/"
+GERALD_PATH: str = "/opt/gerald/gerald/"
 
 
 def main():

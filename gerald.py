@@ -6,17 +6,14 @@ import parser
 import remote
 import display
 
-IMAGE_DISPLAY_TIME = 20
-
 
 def main():
     remote.synchronise()
+    files = parser.parse_file_list(remote.get_content())
 
     while True:
-        files = parser.parse_file_list(remote.get_content())
-
-        display.images(list(map((lambda file_and_type: str(file_and_type[0])), filter((lambda file_and_type: (file_and_type[1] == parser.FileType.IMAGE)), files))), IMAGE_DISPLAY_TIME)
-        display.videos(list(map((lambda file_and_type: str(file_and_type[0])), filter((lambda file_and_type: (file_and_type[1] == parser.FileType.VIDEO)), files))))
+        display.images(list(map((lambda file: str(file.path)), filter((lambda file: (file.type == parser.FileType.IMAGE)), files))))
+        display.videos(list(map((lambda file: str(file.path)), filter((lambda file: (file.type == parser.FileType.VIDEO)), files))))
 
 
 if __name__ == '__main__':
