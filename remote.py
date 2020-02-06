@@ -2,7 +2,10 @@ from typing import List
 import subprocess
 from pathlib import Path
 
-REMOTE_DIRECTORY: str = "/opt/gerald/remote/"
+GERALD_ROOT_DIRECTORY: str = "/opt/gerald"
+REMOTE_DIRECTORY: str = GERALD_ROOT_DIRECTORY + "/remote"
+ONEDRIVE_CONFIG: str = GERALD_ROOT_DIRECTORY + "/config/onedrive"
+ONEDRIVE_LOCATION: str = GERALD_ROOT_DIRECTORY + "/onedrive"
 
 
 def synchronise():
@@ -12,8 +15,8 @@ def synchronise():
 def sync_onedrive():
     print("Syncing OneDrive remote...")
     subprocess.run(["sudo", "rm", "-rf", REMOTE_DIRECTORY + "/*"])
-    subprocess.run(["sudo", "rm", "-f", "/home/pi/.config/onedrive/items.sqlite3"])
-    subprocess.run(["onedrive", "--synchronize", "--download-only", "--confdir", "/home/pi/.config/onedrive"])
+    subprocess.run(["sudo", "rm", "-f", ONEDRIVE_CONFIG + "/items.sqlite3"])
+    subprocess.run([ONEDRIVE_LOCATION, "--synchronize", "--download-only", "--confdir", ONEDRIVE_CONFIG])
     print("Done.")
 
 

@@ -28,7 +28,9 @@ fi
 cd $INSTALL_TARGET_ROOT
 
 echo "Installing Gerald..."
-git clone https://github.com/TechnoElf/gerald.git
+if [ ! -f ${INSTALL_TARGET_ROOT}/gerald ]; then
+  git clone https://github.com/TechnoElf/gerald.git
+fi
 echo "Installed"
 
 echo "Installing dependencies..."
@@ -48,7 +50,7 @@ if [ ! -f $ONEDRIVE_CONFIG ]; then
   mkdir -p $ONEDRIVE_CONFIG
 fi
 
-if [ ! -f $ONEDRIVE_CONFIG ]; then
+if [ ! -f $ONEDRIVE_REMOTE ]; then
   mkdir $ONEDRIVE_REMOTE
 fi
 
