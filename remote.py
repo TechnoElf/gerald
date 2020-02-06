@@ -14,8 +14,8 @@ def synchronise():
 
 def sync_onedrive():
     print("Syncing OneDrive remote...")
-    subprocess.run(["sudo", "rm", "-rf", REMOTE_DIRECTORY + "/*"])
-    subprocess.run(["sudo", "rm", "-f", ONEDRIVE_CONFIG + "/items.sqlite3"])
+    subprocess.run(["rm", "-r", REMOTE_DIRECTORY + "/*"])
+    subprocess.run(["rm", ONEDRIVE_CONFIG + "/items.sqlite3"])
     subprocess.run([ONEDRIVE_LOCATION, "--synchronize", "--download-only", "--confdir", ONEDRIVE_CONFIG])
     print("Done.")
 
