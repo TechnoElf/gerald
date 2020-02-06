@@ -21,17 +21,11 @@ INSTALL_TARGET_ROOT="/opt/gerald/"
 ONEDRIVE_CONFIG="${INSTALL_TARGET_ROOT}/config/onedrive/"
 ONEDRIVE_REMOTE="${INSTALL_TARGET_ROOT}/remote"
 
-if [ ! -f $INSTALL_TARGET_ROOT ]; then
+if [ ! -d $INSTALL_TARGET_ROOT ]; then
   sudo mkdir $INSTALL_TARGET_ROOT
   sudo chown $USER $INSTALL_TARGET_ROOT
 fi
 cd $INSTALL_TARGET_ROOT
-
-echo "Installing Gerald..."
-if [ ! -f ${INSTALL_TARGET_ROOT}/gerald ]; then
-  git clone https://github.com/TechnoElf/gerald.git
-fi
-echo "Installed"
 
 echo "Installing dependencies..."
 while fuser /var/lib/dpkg/lock >/dev/null 2>&1 ; do
@@ -41,16 +35,22 @@ sudo apt update
 sudo apt install -y git fbi omxplayer
 echo "Installed"
 
+echo "Installing Gerald..."
+if [ ! -d ${INSTALL_TARGET_ROOT}/gerald ]; then
+  git clone https://github.com/TechnoElf/gerald.git
+fi
+echo "Installed"
+
 echo "Installing OneDrive..."
 if [ ! -f ${INSTALL_TARGET_ROOT}/onedrive ]; then
   bash ${INSTALL_TARGET_ROOT}/gerald/build_onedrive.sh
 fi
 
-if [ ! -f $ONEDRIVE_CONFIG ]; then
+if [ ! -d $ONEDRIVE_CONFIG ]; then
   mkdir -p $ONEDRIVE_CONFIG
 fi
 
-if [ ! -f $ONEDRIVE_REMOTE ]; then
+if [ ! -d $ONEDRIVE_REMOTE ]; then
   mkdir $ONEDRIVE_REMOTE
 fi
 
