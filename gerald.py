@@ -19,8 +19,13 @@ def main():
         time.sleep(20)
 
     while True:
-        display.images(list(map((lambda file: str(file.path)), filter((lambda file: (file.type == parser.FileType.IMAGE)), files))))
-        display.videos(list(map((lambda file: str(file.path)), filter((lambda file: (file.type == parser.FileType.VIDEO)), files))))
+        for file in files:
+            if file.type == parser.FileType.IMAGE:
+                display.image(file)
+            elif file.type == parser.FileType.VIDEO:
+                display.video(file)
+            else:
+                print("Unknown file type of " + str(file.path))
 
 
 if __name__ == '__main__':
