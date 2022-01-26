@@ -32,7 +32,7 @@ while fuser /var/lib/dpkg/lock >/dev/null 2>&1 ; do
   sleep 0.5
 done
 sudo apt update
-sudo apt install -y git fbi omxplayer
+sudo apt install -y git fbi omxplayer onedrive
 echo "Installed"
 
 echo "Installing Gerald..."
@@ -42,10 +42,6 @@ fi
 echo "Installed"
 
 echo "Installing OneDrive..."
-if [ ! -f ${INSTALL_TARGET_ROOT}/onedrive ]; then
-  bash ${INSTALL_TARGET_ROOT}/gerald/build_onedrive.sh
-fi
-
 if [ ! -d $ONEDRIVE_CONFIG ]; then
   mkdir -p $ONEDRIVE_CONFIG
 fi
