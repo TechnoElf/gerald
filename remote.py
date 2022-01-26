@@ -5,7 +5,7 @@ from pathlib import Path
 GERALD_ROOT_DIRECTORY: str = "/opt/gerald"
 REMOTE_DIRECTORY: str = GERALD_ROOT_DIRECTORY + "/remote"
 ONEDRIVE_CONFIG: str = GERALD_ROOT_DIRECTORY + "/config/onedrive"
-ONEDRIVE_LOCATION: str = GERALD_ROOT_DIRECTORY + "/onedrive"
+ONEDRIVE_LOCATION: str = "onedrive"
 
 
 def synchronise():
